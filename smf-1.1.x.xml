@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>LiamHammett:BiographySection</id>
+	<version>1.1</version>
+
+   <file name="$languagedir/Profile.english.php">
+      <operation>
+         <search position="end" />
+         <add><![CDATA[$txt['bionotice'] = 'BBC code is allowed in the biography box.';
+$txt['bio'] = 'Biography';]]></add>
+      </operation>
+</file>
+
+	<file name="$themedir/Profile.template.php">
+		<operation>
+			<search position="before"><![CDATA[// Can they add this member as a buddy?
+]]></search>
+			<add><![CDATA[
+//Show the box for the biography
+
+    echo '
+               <td><b>Biography:</b></td>
+               <td>', parse_bbc($context['member']['options']['bio']), '</td>
+            </tr><tr>';
+
+ echo '
+               <td colspan="2"><hr size="1" width="100%" class="hrcolor" /></td>
+    </tr>';]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[// Website details.]]></search>
+			<add><![CDATA[
+ <td colspan="2"><hr size="1" width="100%" class="hrcolor" /></td>
+    </tr>
+
+<td><b>Biography:</b> <div class="smalltext">', $txt['bionotice'], '</div></td>   <td><textarea name="default_options[bio]" rows="7" cols="70">', @$context['member']['options']['bio'], '</textarea></td>]]></add>
+		</operation>
+	</file>
+</modification>
